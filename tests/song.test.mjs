@@ -16,9 +16,9 @@ test("a 5 frame hit window is 2 early, 1 perfect, 2 late: about 42 ms either sid
   assert.ok(Math.abs(hitWindowMs(2) - 41.67) < 0.01);
 });
 
-test("the page opens on Rhythm Pass with feedback on, and a perfect performance passes its defaults", () => {
-  assert.equal(DEFAULTS.rhythmPass && DEFAULTS.labels && DEFAULTS.colors && DEFAULTS.lyre, true);
-  assert.equal(DEFAULTS.bars || DEFAULTS.earlySkip, false);
+test("the page opens on Rhythm Pass with note colors on and timing popups off, and a perfect performance passes its defaults", () => {
+  assert.equal(DEFAULTS.rhythmPass && DEFAULTS.colors && DEFAULTS.lyre, true);
+  assert.equal(DEFAULTS.labels || DEFAULTS.bars || DEFAULTS.earlySkip, false);
   assert.equal(Object.values(PRESETS.original).some(Boolean), false, "the Original preset turns every switch off");
   const opening = { windowMs: hitWindowMs(DEFAULTS.windowFrames), missesAllowed: DEFAULTS.missesAllowed, basis: DEFAULTS.basis, holdPercent: DEFAULTS.holdPercent };
   assert.equal(judge(perfect, opening).pass, true);

@@ -47,7 +47,7 @@ export const SONG = {
 // The switches. A preset is only a bundle of these: "original" turns every one off.
 export const PRESETS = {
   original: { rhythmPass: false, labels: false, colors: false, bars: false, lyre: false, earlySkip: false },
-  rhythm: { rhythmPass: true, labels: true, colors: true, bars: false, lyre: true, earlySkip: false },
+  rhythm: { rhythmPass: true, labels: false, colors: true, bars: false, lyre: true, earlySkip: false },
 };
 // The numbers behind the rhythm judge. Both presets share them.
 export const TUNING = {
