@@ -63,6 +63,22 @@ input[type="range"] { width: 100%; accent-color: var(--tint); }
 .row > span { display: flex; align-items: center; gap: 6px; }
 .info { flex: none; width: 18px; height: 18px; padding: 0; border-radius: 50%; background: transparent; box-shadow: inset 0 0 0 1px var(--muted); color: var(--muted); font: italic 600 11px/18px Georgia, serif; text-align: center; cursor: help; }
 .info:hover, .info:focus-visible { background: var(--tint); box-shadow: none; color: #06262a; }
+/* ---- the first-visit note: a sheet over a dimmed page ---- */
+#intro { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px; background: rgba(4, 12, 16, 0.55); animation: introfade 0.25s ease-out both; }
+#intro[hidden] { display: none; }
+#intro .sheet { position: relative; width: min(420px, 100%); padding: 26px 26px 22px; border-radius: 20px; text-align: center; background: var(--material); backdrop-filter: blur(22px) saturate(1.5); -webkit-backdrop-filter: blur(22px) saturate(1.5); border: 0.5px solid var(--line); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: introrise 0.35s cubic-bezier(0.2, 0.9, 0.3, 1) both; }
+#intro h2 { margin: 0 0 12px; font-size: 19px; font-weight: 600; }
+#intro p { margin: 0 0 10px; font-size: 14.5px; line-height: 1.45; }
+#introClose { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; padding: 0; border-radius: 50%; font-size: 17px; line-height: 28px; color: var(--muted); }
+#introGo { margin-top: 10px; padding: 9px 22px; border-radius: 999px; font-weight: 600; background: var(--tint); color: #06262a; }
+#introGo:hover { background: var(--tint); filter: brightness(1.08); }
+#introGo kbd { margin-right: 6px; background: rgba(6, 38, 42, 0.18); color: inherit; }
+#intro.leaving { animation: introout 0.22s ease-in both; pointer-events: none; }
+#intro.leaving .sheet { animation: introfall 0.22s ease-in both; }
+@keyframes introfade { from { opacity: 0; } }
+@keyframes introout { to { opacity: 0; } }
+@keyframes introfall { to { opacity: 0; transform: translateY(14px) scale(0.96); } }
+@keyframes introrise { from { opacity: 0; transform: translateY(14px) scale(0.96); } }
 #tip { position: fixed; z-index: 10; padding: 8px 10px; border-radius: 10px; font-size: 12.5px; background: rgba(245, 247, 248, 0.96); color: #10202a; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45); pointer-events: none; }
 select { background: transparent; border: 0; color: var(--muted); text-align: right; cursor: pointer; }
 select option { color: #111; }

@@ -451,7 +451,27 @@ for (const btn of document.querySelectorAll("#keys button")) {
   for (const ev of ["pointerup", "pointercancel", "lostpointercapture"]) btn.addEventListener(ev, () => noteUp(id));
 }
 const noteForKey = (key) => NOTES.find((n) => n.key === key)?.id;
+// ---- the first-visit note ----
+// It shows once per browser. Nothing else works until it is closed with E, Enter, Esc or its buttons.
+const INTRO_KEY = "ocarina-rhythm-pass-intro-seen";
+let introOpen = true;
+try { introOpen = !localStorage.getItem(INTRO_KEY); } catch { /* no storage: show it */ }
+$("intro").hidden = !introOpen;
+function closeIntro() {
+  if (!introOpen) return;
+  introOpen = false;
+  try { localStorage.setItem(INTRO_KEY, "1"); } catch { /* ignore */ }
+  $("intro").classList.add("leaving");
+  setTimeout(() => { $("intro").hidden = true; }, 220);
+}
+$("introClose").addEventListener("click", closeIntro);
+$("introGo").addEventListener("click", closeIntro);
+
 addEventListener("keydown", (e) => {
+  if (introOpen) {
+    if (["e", "enter", "escape"].includes(e.key.toLowerCase())) { e.preventDefault(); if (!e.repeat) closeIntro(); }
+    return;
+  }
   if (e.target.matches?.("select, input[type=range]")) return; // a focused slider or menu keeps its own keys
   const id = noteForKey(e.key);
   if (id) { e.preventDefault(); if (!e.repeat) noteDown(id); return; }
@@ -487,7 +507,7 @@ function frame(now) {
   if (finalHold) checkFinalHold(now);
   if (mode === "play" || finalHold) updateLyre(now);
   if (sound.ctx) tickLyre(now);
-  world.setPrompt(mode === "walk" && world.onPlate());
+  world.setPrompt(mode === "walk" && world.onPlate() && !introOpen);
   if (settings.bars && mode !== "walk") drawChart(); // the bar view moves with time
   world.update(dt);
   requestAnimationFrame(frame);
