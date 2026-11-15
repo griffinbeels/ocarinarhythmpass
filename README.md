@@ -63,7 +63,7 @@ To run the tests for the rhythm rule: `node --test tests/song.test.mjs`
 
 ## Notes
 
-- The idea is about the ocarina songs in The Legend of Zelda: Ocarina of Time 3D. The length of the wait before the repeat, and the order of what the chart does, were measured from that game.
+- The idea is about the ocarina songs in The Legend of Zelda: Ocarina of Time. The length of the wait before the repeat, and the order of what the chart does, were measured from that game.
 - Everything you see and hear was made for this prototype: the song, the room, the figure and the sounds. It uses no art, music or code from any game.
 - I built this with Claude as a coding tool. The design and the tuning choices are mine.
 - The 3D drawing uses [three.js](https://threejs.org/) under the MIT license. The license is in `vendor/three-LICENSE.txt`.
