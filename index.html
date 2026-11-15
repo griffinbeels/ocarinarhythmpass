@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ocarina Rhythm Pass</title>
+  <meta name="description" content="A playable prototype of the Rhythm Pass idea.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="view" aria-label="A stone room with a pool. A small figure stands on a glowing plate."></canvas>
+
+  <header id="title">
+    <h1>Ocarina Rhythm Pass</h1>
+    <p id="level">Water 1 / 3</p>
+  </header>
+
+  <p id="legend" aria-label="Controls">
+    <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move
+    <kbd>E</kbd> ocarina
+    <kbd>←</kbd><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd><kbd>Space</kbd> notes
+  </p>
+
+  <aside id="panel" aria-label="Options">
+    <button id="panelToggle" aria-expanded="true">Hide</button>
+    <div id="panelBody">
+      <section class="group">
+        <div class="segmented" role="radiogroup" aria-label="Preset">
+          <label><input type="radio" name="preset" value="original"><span>Original</span></label>
+          <label><input type="radio" name="preset" value="rhythm"><span>Rhythm Pass Prototype</span></label>
+        </div>
+        <p class="caption" id="presetText"></p>
+      </section>
+
+      <section class="group">
+        <h2>Settings</h2>
+        <div class="card">
+          <label class="row"><span>Rhythm Pass <button type="button" class="info" aria-label="About Rhythm Pass" data-tip="Play the song in rhythm and the game does not repeat it back to you. The song just continues.">i</button></span><input type="checkbox" class="switch" id="rhythmPass"></label>
+          <label class="row"><span>Timing popups <button type="button" class="info" aria-label="About Timing popups" data-tip="Above each note, shows how early or late you started it. The number counts frames. One frame is 1/60 of a second.">i</button></span><input type="checkbox" class="switch" id="labels"></label>
+          <label class="row"><span>Note colors <button type="button" class="info" aria-label="About Note colors" data-tip="Each note changes color as you play it. Green was on time. Yellow was close. Red missed.">i</button></span><input type="checkbox" class="switch" id="colors"></label>
+          <label class="row"><span>Note length bars <button type="button" class="info" aria-label="About Note length bars" data-tip="Draws each note as a bar on a moving time line. The bar grows while you hold the key. Dashed boxes show the song.">i</button></span><input type="checkbox" class="switch" id="bars"></label>
+          <label class="row"><span>Accompaniment <button type="button" class="info" aria-label="About Accompaniment" data-tip="A lyre joins in after you play three notes in rhythm. The lyre fades when you lose the rhythm and returns when you find it.">i</button></span><input type="checkbox" class="switch" id="lyre"></label>
+          <label class="row"><span>Early skip <button type="button" class="info" aria-label="About Early skip" data-tip="You can always press E to skip the end of the song. With Early skip on, E also skips the part the game repeats.">i</button></span><input type="checkbox" class="switch" id="earlySkip"></label>
+        </div>
+      </section>
+
+      <section class="group" aria-label="Results">
+        <h2>Time per song</h2>
+        <div class="card">
+          <div class="row"><span>Last</span><span class="value" id="lastRun">–</span></div>
+          <div class="row"><span>Best</span></div>
+          <div id="best"></div>
+        </div>
+      </section>
+
+      <section class="group">
+        <details>
+          <summary>History</summary>
+          <div class="tablewrap">
+            <table id="log">
+              <thead><tr><th>Rule</th><th>Result</th><th>Input</th><th>Total</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <button id="clearLog">Clear history</button>
+        </details>
+      </section>
+
+      <section class="group">
+        <details>
+          <summary>Tuning</summary>
+          <div class="card">
+            <label class="row stack"><span><span>Hit window <button type="button" class="info" aria-label="About Hit window" data-tip="How early or late a note can start and still count as on time.">i</button></span><b class="value" id="windowText"></b></span>
+              <input type="range" id="windowFrames" min="0" max="12" step="1"></label>
+            <label class="row stack"><span><span>Hold each note <button type="button" class="info" aria-label="About Hold each note" data-tip="How much of each note's length you must hold the key. Holding a note longer is always fine.">i</button></span><b class="value" id="holdText"></b></span>
+              <input type="range" id="holdPercent" min="0" max="100" step="10"></label>
+            <label class="row"><span>Misses allowed <button type="button" class="info" aria-label="About Misses allowed" data-tip="How many notes can miss and still earn a Rhythm Pass.">i</button></span>
+              <select id="missesAllowed"><option value="0">0</option><option value="1">1</option><option value="2">2</option></select></label>
+            <label class="row"><span>Timed from <button type="button" class="info" aria-label="About Timed from" data-tip="Measure each note's timing from the first note of the song, or from the note before it.">i</button></span>
+              <select id="basis"><option value="first">First note</option><option value="previous">Previous note</option></select></label>
+          </div>
+        </details>
+      </section>
+    </div>
+  </aside>
+
+  <p id="tip" role="tooltip" hidden></p>
+
+  <button id="ocarinaBtn"></button>
+
+  <section id="hud" aria-label="Note chart" hidden>
+    <p id="banner" role="status"></p>
+    <div id="card"></div>
+    <div id="chart"></div>
+    <div id="keys" aria-label="Note buttons"></div>
+  </section>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

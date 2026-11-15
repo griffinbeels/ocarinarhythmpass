@@ -1,0 +1,10 @@
+{
+  "name": "ocarina-rhythm-pass",
+  "private": true,
+  "type": "module",
+  "description": "A small playable test of one design idea: a song that skips its repeat when you play it in rhythm.",
+  "scripts": {
+    "start": "node serve.mjs",
+    "test": "node --test tests/song.test.mjs"
+  }
+}
