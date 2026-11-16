@@ -17,16 +17,16 @@ export const CHART_SLOTS = 8; // the chart holds eight notes, then clears
 export const SONG = {
   name: "Tide Song",
   // The opening the player enters: short, short, long, twice.
-  // It is as slow as the measured song: about 3.5 s from the first note to the last, and 4.5 s in all.
+  // Each long note lasts two beats. The opening takes 3 s from the first note to the last, and 4 s in all.
   phrase: [
     { note: "down", at: 0, len: 440 },
     { note: "right", at: 500, len: 440 },
-    { note: "up", at: 1000, len: 1400 },
-    { note: "down", at: 2500, len: 440 },
-    { note: "right", at: 3000, len: 440 },
-    { note: "up", at: 3500, len: 940 },
+    { note: "up", at: 1000, len: 940 },
+    { note: "down", at: 2000, len: 440 },
+    { note: "right", at: 2500, len: 440 },
+    { note: "up", at: 3000, len: 940 },
   ],
-  phraseLength: 4500,
+  phraseLength: 4000,
   // The rest of the song. The game always plays this part. It lasts the measured 3 s.
   tail: [
     { note: "up", at: 0, len: 460 },
